@@ -26,6 +26,11 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'
 # Bootstrap for devise
 gem 'devise-bootstrap-views'
+# A ruby gem that retrieves stock quotes from Yahoo.
+gem 'stock_quote'
+# A ruby gem that actually works and retrieve quotes from yahoo
+# https://github.com/herval/yahoo-finance
+gem 'yahoo-finance'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
