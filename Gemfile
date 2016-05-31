@@ -28,7 +28,7 @@ gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 # A ruby gem that retrieves stock quotes from Yahoo.
 gem 'stock_quote'
-# A ruby gem that actually works and retrieve quotes from yahoo
+# Another ruby gem that retrieve quotes from Yahoo
 # https://github.com/herval/yahoo-finance
 gem 'yahoo-finance'
 
