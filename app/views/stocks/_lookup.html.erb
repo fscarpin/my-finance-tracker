@@ -1,35 +1,40 @@
 <div id="stock-lookup">
   <h3>Search for Stocks</h3>
+
   <!--
   remote: true is to use Ajax
   id: stock-lookup-form identifies our form in the stock.js file
   -->
   <%= form_tag search_stocks_path, remote: true, method: :get, id: 'stock-lookup-form' do %>
-    <div class='form-group row text-center col-md-10'>
-      <div class='col-md-8'>
-        <%= text_field_tag :stock, params[:stock], placeholder: 'Stock ticker symbol', autofocus: true,
-                            class: 'form-control search-box input-lg' %>
-      </div>
-      <div class='col-md-2'>
-        <%= button_tag(type: :submit, class: 'btn btn-lg btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
-          <i class='fa fa-search'></i> Look up a stock
-        <% end %>
+    <div class="form-group">
+      <div class='row'>
+        <div class='col-lg-9'>
+          <%= text_field_tag :stock, params[:stock], placeholder: 'Stock ticker symbol', autofocus: true,
+                              class: 'form-control search-box input-lg' %>
+        </div>
+        <div class='col-lg-3'>
+          <%= button_tag(type: :submit, class: 'btn btn-lg btn-success',
+                         data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
+            <i class='fa fa-search'></i> Look up a stock
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
 
   <!-- If the stock was found, let's show it -->
-  <% if @stock %>
-    <div id="stock-lookup-results" class="well results-block col-md-10">
-      <strong>Symbol:</strong> <%= @stock.ticker %>
-      <strong>Name:</strong> <%= @stock.name %>
-      <strong>Price:</strong> <%= @stock.price %>
+  <% if @stock && @stock.ticker? %>
+    <div id="stock-lookup-results">
+      <div class="well well-lg">
+          <strong>Symbol:</strong> <%= @stock.ticker %>
+          <strong>Name:</strong> <%= @stock.name %>
+          <strong>Price:</strong> <%= @stock.price %>
+      </div>
     </div>
   <% end %>
 
   <!-- Stock ticker not found? -->
-  <div class="row col-md-8">
-    <div id="stock-lookup-errors">
-    </div>
+  <div id="stock-lookup-errors">
   </div>
+
 </div>
