@@ -1,5 +1,8 @@
 class Stock < ActiveRecord::Base
 
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
+
   def self.find_by_ticker(symbol_ticker)
     where(ticker: symbol_ticker).first
   end

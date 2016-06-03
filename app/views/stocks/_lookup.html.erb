@@ -26,9 +26,12 @@
   <% if @stock && @stock.ticker? %>
     <div id="stock-lookup-results">
       <div class="well well-lg">
-          <strong>Symbol:</strong> <%= @stock.ticker %>
-          <strong>Name:</strong> <%= @stock.name %>
-          <strong>Price:</strong> <%= @stock.price %>
+        <strong>Symbol:</strong> <%= @stock.ticker %>
+        <strong>Name:</strong> <%= @stock.name %>
+        <strong>Price:</strong> <%= @stock.price %>
+        <% stock_id = @stock.id ? @stock.id : "" %>
+        <%= link_to "Add Stock", user_stocks_path(user_id: current_user.id, stock_id: stock_id,
+                    stock_ticker: @stock.ticker), method: :post, class: "btn btn-success btn-small" %>
       </div>
     </div>
   <% end %>
