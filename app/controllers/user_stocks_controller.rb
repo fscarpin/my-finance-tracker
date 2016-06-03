@@ -7,18 +7,9 @@ class UserStocksController < ApplicationController
     @user_stocks = UserStock.all
   end
 
-  # GET /user_stocks/1
-  # GET /user_stocks/1.json
-  def show
-  end
-
   # GET /user_stocks/new
   def new
     @user_stock = UserStock.new
-  end
-
-  # GET /user_stocks/1/edit
-  def edit
   end
 
   # POST /user_stocks
@@ -60,26 +51,12 @@ class UserStocksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /user_stocks/1
-  # PATCH/PUT /user_stocks/1.json
-  def update
-    respond_to do |format|
-      if @user_stock.update(user_stock_params)
-        format.html { redirect_to @user_stock, notice: 'User stock was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_stock }
-      else
-        format.html { render :edit }
-        format.json { render json: @user_stock.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /user_stocks/1
   # DELETE /user_stocks/1.json
   def destroy
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to user_stocks_url, notice: 'User stock was successfully destroyed.' }
+      format.html { redirect_to(my_portfolio_path, notice: 'Stock has been removed from your portfolio') }
       format.json { head :no_content }
     end
   end

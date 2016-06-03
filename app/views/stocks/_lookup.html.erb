@@ -13,25 +13,48 @@
                               class: 'form-control search-box input-lg' %>
         </div>
         <div class='col-lg-3'>
-          <%= button_tag(type: :submit, class: 'btn btn-lg btn-success',
+          <!-- btn-block: spans the full width of a parent (fills the column on this case) -->
+          <%= button_tag(type: :submit, class: 'btn btn-lg btn-success btn-block',
                          data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
-            <i class='fa fa-search'></i> Look up a stock
+            <i class='fa fa-search'></i> Search Stock
           <% end %>
         </div>
       </div>
     </div>
   <% end %>
 
+  <!-- Shows a warning if the user can't add more stocks due to the limit -->
+  <% if !current_user.under_stock_limit? %>
+    <div class="alert alert-warning" role="alert">
+      <%= "Unable to add more stocks. Stock limit of #{pluralize User::MAXIMUN_NUMBER_OF_STOCKS, "stock"} has been reached." %>
+    </div>
+  <% end %>
+
   <!-- If the stock was found, let's show it -->
+  <% #binding.pry %>
   <% if @stock && @stock.ticker? %>
     <div id="stock-lookup-results">
       <div class="well well-lg">
         <strong>Symbol:</strong> <%= @stock.ticker %>
         <strong>Name:</strong> <%= @stock.name %>
         <strong>Price:</strong> <%= @stock.price %>
-        <% stock_id = @stock.id ? @stock.id : "" %>
-        <%= link_to "Add Stock", user_stocks_path(user_id: current_user.id, stock_id: stock_id,
-                    stock_ticker: @stock.ticker), method: :post, class: "btn btn-success btn-small" %>
+
+        <% if current_user.can_add_stock? (@stock.ticker) %>
+          <% stock_id = @stock.id ? @stock.id : "" %>
+          <p>
+          <%= link_to user_stocks_path(user_id: current_user.id, stock_id: stock_id,stock_ticker: @stock.ticker),
+                method: :post, class: "btn btn-success btn-sm medium-margin-top" do %>
+            <i class="fa fa-plus"></i> Add Stock
+          <% end %>
+          </p>
+        <% else %>
+          <!-- Check if the stock was already added  -->
+          <% if current_user.stock_already_added? (@stock.ticker) %>
+            <p class="medium-margin-top">
+              <h4><span class="label label-danger"> You already added this stock </span></h4>
+            </p>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>
