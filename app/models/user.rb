@@ -26,4 +26,11 @@ class User < ActiveRecord::Base
     return user_stocks.where(stock_id: stock.id).exists?
   end
 
+  def full_name
+    if first_name.present? || last_name.present?
+      return "#{first_name} #{last_name}".strip
+    else
+      return "Anonymous"
+    end
+  end
 end

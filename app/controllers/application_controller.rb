@@ -5,4 +5,13 @@ class ApplicationController < ActionController::Base
 
   # All actions require an authenticated user
   before_action :authenticate_user!
+
+  # Added custom fields (first and last name) to devise
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up).push(:first_name, :last_name)
+  end
 end
