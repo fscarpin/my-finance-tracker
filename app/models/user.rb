@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 20 }
+
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
@@ -29,8 +31,6 @@ class User < ActiveRecord::Base
   def full_name
     if first_name.present? || last_name.present?
       return "#{first_name} #{last_name}".strip
-    else
-      return "Anonymous"
     end
   end
 end

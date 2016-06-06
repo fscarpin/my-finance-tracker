@@ -18,3 +18,20 @@
 .medium-margin-top {
   margin-top: 1em;
 }
+
+.medium-padding-left {
+  padding-left: 1em;
+}
+
+.medium-padding-right {
+  padding-right: 1em;
+}
+
+.small-padding-right {
+  padding-right: 0.5em;
+}
+
+/* hover means when the mouse is over it */
+.nav-link:hover {
+  text-decoration: none;
+}
