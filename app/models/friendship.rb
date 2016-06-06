@@ -1,5 +1,5 @@
 class Friendship < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :friend, :class_name => "Friendship"
+  belongs_to :friend, :class_name => "User"
 end

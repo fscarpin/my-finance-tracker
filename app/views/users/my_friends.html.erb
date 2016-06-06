@@ -1,1 +1,9 @@
 <h3>My Friends</h3>
+
+<%= render "friends/lookup" %>
+
+<% if @friends.count > 0 %>
+  <%= render "friends/list" %>
+<% else %>
+  <p> You don't have any friends yet </p>
+<% end %>

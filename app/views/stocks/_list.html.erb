@@ -6,7 +6,7 @@
     <th>Symbol</th>
     <th>Current Price</th>
 
-    <% if @user.id = current_user.id %>
+    <% if @user.id == current_user.id %>
       <th>Actions</th>
     <% end %>
   </tr>
@@ -19,10 +19,12 @@
       <td><%= stock.ticker %></td>
       <td><%= stock.last_price %></td>
 
-      <% if @user.id = current_user.id %>
+      <% if @user.id == current_user.id %>
         <% confirm_msg = "Are you sure you want to remove #{stock.name} stock from your portfolio?" %>
         <td>
-          <%= link_to user_stock_path(@user_stocks.find_by(stock_id: stock.id)), method: :delete, data: {confirm: confirm_msg}, class: "btn btn-danger btn-sm" do %>
+          <% user_stock_id = @user_stocks.find_by(stock_id: stock.id) %>
+          <%= link_to user_stock_path(user_stock_id), method: :delete, data: {confirm: confirm_msg},
+                class: "btn btn-danger btn-sm" do %>
             <i class="fa fa-trash"></i> Delete
           <% end %>
         </td>
