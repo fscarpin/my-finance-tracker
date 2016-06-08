@@ -1,0 +1,48 @@
+<div id="user-lookup">
+  <h3> Find someone </h3>
+
+  <%= form_tag search_users_path, method: :get, remote: true, id: "user-lookup-form" do %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= text_field_tag :search_input, params[:search_input],
+                              placeholder: "Find someone by email, first or last name",
+                              autofocus: true, class: "form-control search-box input-lg" %>
+        </div>
+
+        <div class="col-lg-3">
+          <%= button_tag(type: :submit, class: 'btn btn-lg btn-success btn-block',
+                         data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
+                <i class='fa fa-search'></i> Find someone
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Display the search results -->
+  <div id="user-lookup-results">
+    <% if @users_found %>
+      <div class="well well-lg">
+        <% @users_found.each do |friend| %>
+          <div class="row small-padding-bottom">
+            <div class="col-lg-8">
+              <strong>Name: </strong><%= friend.full_name %>
+              <strong>Email: </strong><%= friend.email %>
+            </div>
+            <div class="col-lg-4">
+              <%= link_to("Show Profile", user_path(friend), class: "btn btn-xs btn-primary") %>
+              <% if !current_user.friends_with(friend) %>
+                <%= link_to("Add Friend", friendships_path(id: friend.id), method: :post, class: "btn btn-xs btn-success") %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="user-lookup-errors">
+  </div>
+
+</div>

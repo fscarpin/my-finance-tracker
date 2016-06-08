@@ -36,4 +36,22 @@ class User < ActiveRecord::Base
       return "#{first_name} #{last_name}".strip
     end
   end
+
+  def friends_with(friend_id)
+    self.friendships.where(friend_id: friend_id).count >= 1
+  end
+
+  def self.matches(field_name, param)
+    where("#{field_name} like ?", "%#{param}%")
+  end
+
+  def self.search(param)
+    return if param.blank?
+
+    param.strip!
+    param.downcase!
+
+    (matches("email", param) + matches("first_name", param) + matches("last_name", param)).uniq
+  end
+
 end

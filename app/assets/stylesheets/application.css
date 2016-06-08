@@ -15,6 +15,14 @@
  *= require_self
  */
 
+ .small-padding-right {
+   padding-right: 0.5em;
+ }
+
+ .small-padding-bottom {
+   padding-bottom: 0.5em;
+ }
+
 .medium-margin-top {
   margin-top: 1em;
 }
@@ -27,8 +35,8 @@
   padding-right: 1em;
 }
 
-.small-padding-right {
-  padding-right: 0.5em;
+.large-padding-bottom {
+  padding-bottom: 2em;
 }
 
 /* hover means when the mouse is over it */

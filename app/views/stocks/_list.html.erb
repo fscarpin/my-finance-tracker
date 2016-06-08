@@ -1,36 +1,48 @@
-<table class="table table-striped table-hover">
+<% if @stocks.blank? %>
 
-<thead>
-  <tr>
-    <th>Name</th>
-    <th>Symbol</th>
-    <th>Current Price</th>
-
-    <% if @user.id == current_user.id %>
-      <th>Actions</th>
+  <div class="alert alert-info">
+    <% if @user == current_user %>
+      You are not following any stocks. Add some now!"
+    <% else %>
+      <%= "#{@user.first_name} is not following any stocks." %>
     <% end %>
-  </tr>
-</thead>
+  </div>
+<% else %>
 
-<tbody>
-  <% @stocks.each do |stock| %>
+  <table class="table table-striped table-hover">
+
+  <thead>
     <tr>
-      <td><%= stock.name %></td>
-      <td><%= stock.ticker %></td>
-      <td><%= stock.last_price %></td>
+      <th>Name</th>
+      <th>Symbol</th>
+      <th>Current Price</th>
 
       <% if @user.id == current_user.id %>
-        <% confirm_msg = "Are you sure you want to remove #{stock.name} stock from your portfolio?" %>
-        <td>
-          <% user_stock_id = @user_stocks.find_by(stock_id: stock.id) %>
-          <%= link_to user_stock_path(user_stock_id), method: :delete, data: {confirm: confirm_msg},
-                class: "btn btn-danger btn-sm" do %>
-            <i class="fa fa-trash"></i> Delete
-          <% end %>
-        </td>
+        <th>Actions</th>
       <% end %>
     </tr>
-  <% end %>
-</tbody>
+  </thead>
 
-</table>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.name %></td>
+        <td><%= stock.ticker %></td>
+        <td><%= stock.last_price %></td>
+
+        <% if @user.id == current_user.id %>
+          <% confirm_msg = "Are you sure you want to remove #{stock.name} stock from your portfolio?" %>
+          <td>
+            <% user_stock_id = @user_stocks.find_by(stock_id: stock.id) %>
+            <%= link_to user_stock_path(user_stock_id), method: :delete, data: {confirm: confirm_msg},
+                  class: "btn btn-danger btn-sm" do %>
+              <i class="fa fa-trash"></i> Delete
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+  </table>
+<% end %>
