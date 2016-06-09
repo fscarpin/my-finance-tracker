@@ -4,13 +4,13 @@
   <%= form_tag search_users_path, method: :get, remote: true, id: "user-lookup-form" do %>
     <div class="form-group">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-xs-7">
           <%= text_field_tag :search_input, params[:search_input],
-                              placeholder: "Find someone by email, first or last name",
+                              placeholder: "Email, first or last name",
                               autofocus: true, class: "form-control search-box input-lg" %>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-xs-5">
           <%= button_tag(type: :submit, class: 'btn btn-lg btn-success btn-block',
                          data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
                 <i class='fa fa-search'></i> Find someone
