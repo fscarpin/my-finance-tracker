@@ -65,10 +65,14 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li role="presentation">
-                <%= link_to "My Profile", edit_user_registration_path(current_user) %>
+              <li>
+                <%= link_to(edit_user_registration_path(current_user)) do %>
+                  <i class="fa fa-user"> My Profile </i>
+                <% end %>
               </li>
-              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete  %></li>
+              <li>
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </li>
             </ul>
           <% end %>
         </div>
@@ -77,7 +81,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

@@ -8,15 +8,15 @@
   <%= form_tag search_stocks_path, remote: true, method: :get, id: 'stock-lookup-form' do %>
     <div class="form-group">
       <div class='row'>
-        <div class='col-lg-9'>
+        <div class='col-xs-9'>
           <%= text_field_tag :stock, params[:stock], placeholder: 'Stock ticker symbol', autofocus: true,
                               class: 'form-control search-box input-lg' %>
         </div>
-        <div class='col-lg-3'>
+        <div class='col-xs-3'>
           <!-- btn-block: spans the full width of a parent (fills the column on this case) -->
           <%= button_tag(type: :submit, class: 'btn btn-lg btn-success btn-block',
                          data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}) do %>
-                <i class='fa fa-search'></i> Search Stock
+                <i class='fa fa-search'></i> <span class="hidden-sm hidden-xs"> Search Stock </span>
           <% end %>
         </div>
       </div>
